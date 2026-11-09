@@ -105,3 +105,5 @@ dist/SmoothScrollSetup.exe
 2,188,800 bytes
 SHA256 ea999fd01c266badb6283f3a4d56a7a6ae35886c52e22bd6bea14232a4d9d8f1
 ```
+
+The committed build and GitHub Actions builds are produced independently. Use the checksum file published with the build you download.
