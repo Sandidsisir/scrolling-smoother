@@ -1,0 +1,71 @@
+name: Build
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ main ]
+    tags: [ "v*" ]
+  pull_request:
+    branches: [ main ]
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+
+      - name: Set up .NET
+        uses: actions/setup-dotnet@v6
+        with:
+          dotnet-version: "8.0.x"
+
+      - name: Build GUI and installer
+        shell: pwsh
+        run: |
+          powershell -ExecutionPolicy Bypass -File .\build.ps1
+
+      - name: Create portable build
+        shell: pwsh
+        run: |
+          Compress-Archive -Path app\* -DestinationPath dist\Scrolling-Smoother-portable.zip -Force
+
+      - name: Verify build output
+        shell: pwsh
+        run: |
+          $files = @(
+            "dist\SmoothScrollSetup.exe",
+            "dist\SmoothScrollSetup.exe.sha256",
+            "dist\Scrolling-Smoother-portable.zip",
+            "SHA256SUMS.txt"
+          )
+          foreach ($file in $files) {
+            if (-not (Test-Path $file)) { throw "Missing $file" }
+          }
+          Get-Content "dist\SmoothScrollSetup.exe.sha256"
+          Get-Content "SHA256SUMS.txt"
+
+      - name: Upload build artifact
+        uses: actions/upload-artifact@v7
+        with:
+          name: Scrolling-Smoother
+          path: |
+            dist/SmoothScrollSetup.exe
+            dist/SmoothScrollSetup.exe.sha256
+            dist/Scrolling-Smoother-portable.zip
+            SHA256SUMS.txt
+          if-no-files-found: error
+
+      - name: Publish release
+        if: startsWith(github.ref, 'refs/tags/')
+        uses: softprops/action-gh-release@v3
+        with:
+          files: |
+            dist/SmoothScrollSetup.exe
+            dist/SmoothScrollSetup.exe.sha256
+            dist/Scrolling-Smoother-portable.zip
+          generate_release_notes: true

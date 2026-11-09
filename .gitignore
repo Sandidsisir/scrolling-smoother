@@ -1,0 +1,21 @@
+# Build output
+bin/
+obj/
+.vs/
+*.user
+*.suo
+*.pdb
+*.log
+
+# Local NuGet restore state
+packages/
+project.assets.json
+project.nuget.cache
+
+# Generated archives
+dist/*.zip
+
+# OS metadata
+Thumbs.db
+desktop.ini
+.DS_Store

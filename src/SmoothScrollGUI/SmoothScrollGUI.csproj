@@ -1,0 +1,38 @@
+<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+  <PropertyGroup>
+    <AssemblyName>SmoothScrollGUI</AssemblyName>
+    <RootNamespace>SmoothScrollGUI</RootNamespace>
+    <OutputType>WinExe</OutputType>
+    <UseWindowsForms>true</UseWindowsForms>
+    <TargetFramework>net48</TargetFramework>
+    <LangVersion>11.0</LangVersion>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <DebugType>none</DebugType>
+    <DebugSymbols>false</DebugSymbols>
+    <GenerateResourceUsePreserializedResources>true</GenerateResourceUsePreserializedResources>
+    <ApplicationIcon>..\..\assets\app.ico</ApplicationIcon>
+  </PropertyGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="costura.microsoft.threading.tasks.dll.compressed" LogicalName="costura.microsoft.threading.tasks.dll.compressed" />
+    <EmbeddedResource Include="costura.microsoft.threading.tasks.extensions.desktop.dll.compressed" LogicalName="costura.microsoft.threading.tasks.extensions.desktop.dll.compressed" />
+    <EmbeddedResource Include="costura.microsoft.threading.tasks.extensions.dll.compressed" LogicalName="costura.microsoft.threading.tasks.extensions.dll.compressed" />
+    <EmbeddedResource Include="costura.newtonsoft.json.dll.compressed" LogicalName="costura.newtonsoft.json.dll.compressed" />
+    <EmbeddedResource Include="costura.newtonsoft.json.pdb.compressed" LogicalName="costura.newtonsoft.json.pdb.compressed" />
+    <EmbeddedResource Include="costura.winformanimation.dll.compressed" LogicalName="costura.winformanimation.dll.compressed" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\refs\newtonsoft.json.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="WinFormAnimation">
+      <HintPath>..\refs\winformanimation.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="System.Core" />
+    <Reference Include="WindowsBase" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="System.Resources.Extensions" Version="8.0.0" />
+  </ItemGroup>
+</Project>

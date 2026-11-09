@@ -1,0 +1,8 @@
+* text=auto eol=lf
+
+*.exe binary
+*.dll binary
+*.ico binary
+*.zip binary
+*.png binary
+*.jpg binary
