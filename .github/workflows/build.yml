@@ -68,4 +68,5 @@ jobs:
             dist/SmoothScrollSetup.exe
             dist/SmoothScrollSetup.exe.sha256
             dist/Scrolling-Smoother-portable.zip
+            SHA256SUMS.txt
           generate_release_notes: true
